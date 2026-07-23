@@ -1,0 +1,18 @@
+# Input media
+*.mp4
+*.mkv
+*.mov
+*.avi
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Arduino
+build-*/
+*.elf
+*.hex
+*.eep
+*.bin
+*.map
