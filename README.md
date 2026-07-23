@@ -1,89 +1,73 @@
-# Odyssey Trailer on ESP32-S3 + 128×64 SSD1306
+# Odyssey Trailer OLED — IMAX Framing
 
-This project converts a video trailer into a tiny black-and-white animation and
-stores all frames directly in the ESP32-S3 flash.
+This version supports both common IMAX aspect ratios.
 
-## What it does
+## Recommended setting
 
-- Resolution: 128×64
-- Color: monochrome
-- Default speed: 5 FPS
-- Audio: not supported
-- Short button press: pause/resume
-- Hold button for 1.2 seconds: restart
-- Trailer repeats automatically
+Use **IMAX 1.90:1** on the 128×64 OLED:
 
-## Existing wiring
+```
+py convert_video.py odyssey_trailer.mp4 --fps 5 --aspect imax190
+```
 
-| Part | ESP32-S3 |
-|---|---|
-| OLED GND | GND |
-| OLED VDD | 3V3 |
-| OLED SCK | GPIO8 |
-| OLED SDA | GPIO9 |
-| Button side 1 | GPIO4 |
-| Button side 2 | GND |
+The OLED is 2.00:1, so a 1.90:1 image uses approximately 122×64 pixels and
+leaves only about three black pixels on each side.
 
-## 1. Install Arduino libraries
+## IMAX 70mm framing
 
-In Arduino IDE Library Manager, install:
+Use this only when the input video really contains a 1.43:1 expanded image:
 
-- Adafruit GFX Library
-- Adafruit SSD1306
+```
+py convert_video.py odyssey_trailer.mp4 --fps 5 --aspect imax143
+```
 
-## 2. Put the trailer in this folder
+On the OLED, this produces an image approximately 92×64 pixels with large black
+bars on the left and right. It preserves the tall IMAX shape but uses less of
+the tiny display.
 
-Use a trailer video you obtained legally. A normal MP4 file is easiest.
+## Completely fill the screen
 
-Example filename:
+```
+py convert_video.py odyssey_trailer.mp4 --fps 5 --aspect fill
+```
 
-    odyssey_trailer.mp4
+This crops the input to the OLED's exact 2.00:1 ratio. It fills every pixel but
+is not an official IMAX aspect ratio.
 
-## 3. Install the converter requirements
+## Keep the video's original shape
 
-Open Command Prompt inside this project folder:
+```
+py convert_video.py odyssey_trailer.mp4 --fps 5 --aspect source
+```
 
-    py -m pip install opencv-python numpy
+## Setup
 
-## 4. Convert the trailer
+Install the converter dependencies:
 
-For a trailer up to 150 seconds at 5 FPS:
+```
+py -m pip install opencv-python numpy
+```
 
-    py convert_video.py odyssey_trailer.mp4 --fps 5 --duration 150
+Then run one of the conversion commands above. The converter replaces:
 
-This replaces:
+- `odyssey_frames.h`
+- `odyssey_frames.cpp`
 
-- odyssey_frames.h
-- odyssey_frames.cpp
+Open `OdysseyTrailerOLED.ino` in Arduino IDE and upload normally.
 
-Each second at 5 FPS uses 5,120 bytes. A 150-second trailer uses about 750 KiB
-for frame data.
+## Controls
 
-For a smaller upload, use 4 FPS:
+- Short press: pause/resume
+- Hold for 1.2 seconds: restart
+- The trailer repeats automatically
 
-    py convert_video.py odyssey_trailer.mp4 --fps 4 --duration 150
+## Hardware
 
-## 5. Open and upload
+OLED SDA to GPIO9
+OLED SCK to GPIO8
+Button to GPIO4 and GND
+OLED power to 3V3 and GND
 
-Open:
+Personal Note
 
-    OdysseyTrailerOLED.ino
-
-Use the same ESP32-S3 board settings that worked for your Wi-Fi mapper.
-
-Important Arduino settings:
-
-- Flash Size: 16 MB
-- Partition Scheme: choose one with enough application space
-- Upload Speed: use the speed that already works for your board
-
-If Arduino says the sketch is too large, select a partition scheme such as
-"Huge APP" or convert at 4 FPS.
-
-## Notes
-
-The generated `odyssey_frames.cpp` can be several megabytes as text. This is
-normal. The actual packed movie data uses only 1,024 bytes per frame in flash.
-
-The screen cannot show real color. Ordered dithering creates black-and-white
-patterns that imitate brightness and preserve more detail than a plain threshold.
+Watching Christopher Nolan's The Odyssey in IMAX was one of those rare cinematic experiences that genuinely captivated me — the visuals the storytelling the sheer scale of it all. This project is an homage to that film's production specifically the use of IMAX cameras. There's something poetic about a movie designed specifically for the IMAX format and seeing that same IMAX ratio recreated on a tiny 128×64 monochrome OLED feels like a creative way to connect my technical skills with the things I love. It's a playful nod to the idea that the medium matters even when you're pushing it to its absolute limits
