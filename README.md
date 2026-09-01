@@ -4,7 +4,24 @@ This project plays a video on a 128×64 monochrome SSD1306 OLED driven by an ESP
 
 ![Demo](assets/demo.gif)
 
-The demo clip above is a 5-second excerpt from the source material in `assets/`, downscaled and palette-quantised for embedding.
+The clip above is a 5-second excerpt from the source material in `assets/`, downscaled and palette-quantised for embedding.
+
+## Source media
+
+The physical source files used to validate the framing and dithering pipeline live in `assets/`:
+
+| File | Purpose |
+|------|---------|
+| `assets/odyssey-frame-1.mp4` | Longer source clip (~60 s) used to exercise FPS sampling and motion handling. |
+| `assets/odyssey-frame-2.mp4` | Shorter source clip (~36 s) used as the basis for the embedded `demo.gif`. |
+| `assets/video-odyssey-trailer-1.jpeg` | Single-frame still used as a colour and contrast reference for the dithering test. |
+| `assets/video-odyssey-trailer-2.jpeg` | Second reference still, captured from a different scene in the same trailer. |
+| `assets/odyssey-equivalent-frame-1.png` | 1:1 reference frame (the same instant that `demo.gif` starts from). |
+| `assets/odyssey-equivalent-frame-2.png` | 1:1 reference frame further into the trailer, used to verify framing drift. |
+| `assets/circuit.jpeg` | Photograph of the wired OLED + ESP32-S3 + button used during development. |
+| `assets/demo.gif` | 5 s, 240×430, 10 fps clip generated from `odyssey-frame-2.mp4` for embedding above. |
+
+Replace the MP4s with a legally obtained copy before running the converter.
 
 ## Recommended setting
 
