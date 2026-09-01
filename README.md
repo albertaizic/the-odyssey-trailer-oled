@@ -4,7 +4,7 @@ This project plays a video on a 128×64 monochrome SSD1306 OLED driven by an ESP
 
 ![Demo](assets/demo.gif)
 
-The clip above is a 5-second excerpt from the source material in `assets/`, downscaled and palette-quantised for embedding.
+The clip above is a 12-second excerpt from `assets/odyssey-frame-1.mp4`, downscaled to 240×430 at 10 fps and palette-quantised for embedding.
 
 ## Source media
 
@@ -12,16 +12,40 @@ The physical source files used to validate the framing and dithering pipeline li
 
 | File | Purpose |
 |------|---------|
-| `assets/odyssey-frame-1.mp4` | Longer source clip (~60 s) used to exercise FPS sampling and motion handling. |
-| `assets/odyssey-frame-2.mp4` | Shorter source clip (~36 s) used as the basis for the embedded `demo.gif`. |
-| `assets/video-odyssey-trailer-1.jpeg` | Single-frame still used as a colour and contrast reference for the dithering test. |
+| `assets/odyssey-frame-1.mp4` | 60 s source clip used to exercise FPS sampling and motion handling. The `demo.gif` excerpt is taken from the t=25s–37s window of this file. |
+| `assets/odyssey-frame-2.mp4` | 36 s source clip used as a secondary input for cross-checking framing consistency. |
+| `assets/video-odyssey-trailer-1.jpeg` | Single-frame still from the trailer, used as a colour and contrast reference for the dithering test. |
 | `assets/video-odyssey-trailer-2.jpeg` | Second reference still, captured from a different scene in the same trailer. |
-| `assets/odyssey-equivalent-frame-1.png` | 1:1 reference frame (the same instant that `demo.gif` starts from). |
+| `assets/odyssey-equivalent-frame-1.png` | 1:1 reference frame from the start of the `demo.gif` excerpt. |
 | `assets/odyssey-equivalent-frame-2.png` | 1:1 reference frame further into the trailer, used to verify framing drift. |
 | `assets/circuit.jpeg` | Photograph of the wired OLED + ESP32-S3 + button used during development. |
-| `assets/demo.gif` | 5 s, 240×430, 10 fps clip generated from `odyssey-frame-2.mp4` for embedding above. |
+| `assets/demo.gif` | 12 s, 240×430, 10 fps clip generated from `odyssey-frame-1.mp4` for embedding above. |
 
 Replace the MP4s with a legally obtained copy before running the converter.
+
+### Reference stills
+
+`assets/video-odyssey-trailer-1.jpeg`:
+
+![Reference still 1](assets/video-odyssey-trailer-1.jpeg)
+
+`assets/video-odyssey-trailer-2.jpeg`:
+
+![Reference still 2](assets/video-odyssey-trailer-2.jpeg)
+
+`assets/odyssey-equivalent-frame-1.png`:
+
+![Equivalent frame 1](assets/odyssey-equivalent-frame-1.png)
+
+`assets/odyssey-equivalent-frame-2.png`:
+
+![Equivalent frame 2](assets/odyssey-equivalent-frame-2.png)
+
+### Hardware
+
+`assets/circuit.jpeg`:
+
+![Wired OLED + ESP32-S3 + button](assets/circuit.jpeg)
 
 ## Recommended setting
 
