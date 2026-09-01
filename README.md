@@ -1,29 +1,23 @@
 # Odyssey Trailer OLED — IMAX Framing
 
 This project plays a video on a 128×64 monochrome SSD1306 OLED driven by an ESP32-S3. A Python converter crops, resizes, dithers, and packs frames into flash so they can be displayed without runtime decoding.
-
 ![Demo](assets/demo.gif)
 
-The clip above is a 12-second excerpt from `assets/odyssey-frame-1.mp4`, downscaled to 240×430 at 10 fps and palette-quantised for embedding.
-
-## Source media
+The clip above is an excerpt from `assets/odyssey-frame-1.mp4` starting at the 3-second mark of the source and running at the source's normal playback speed. It is downscaled to 240×430 and palette-quantised for embedding.
 
 The physical source files used to validate the framing and dithering pipeline live in `assets/`:
-
 | File | Purpose |
 |------|---------|
-| `assets/odyssey-frame-1.mp4` | 60 s source clip used to exercise FPS sampling and motion handling. The `demo.gif` excerpt is taken from the t=25s–37s window of this file. |
+| `assets/odyssey-frame-1.mp4` | ~58 s source clip used to exercise FPS sampling and motion handling. The `demo.gif` excerpt starts at the 3-second mark of this file and runs through the next 19 seconds at normal playback speed. |
 | `assets/odyssey-frame-2.mp4` | 36 s source clip used as a secondary input for cross-checking framing consistency. |
 | `assets/video-odyssey-trailer-1.jpeg` | Single-frame still from the trailer, used as a colour and contrast reference for the dithering test. |
 | `assets/video-odyssey-trailer-2.jpeg` | Second reference still, captured from a different scene in the same trailer. |
 | `assets/odyssey-equivalent-frame-1.png` | 1:1 reference frame from the start of the `demo.gif` excerpt. |
 | `assets/odyssey-equivalent-frame-2.png` | 1:1 reference frame further into the trailer, used to verify framing drift. |
 | `assets/circuit.jpeg` | Photograph of the wired OLED + ESP32-S3 + button used during development. |
-| `assets/demo.gif` | 12 s, 240×430, 10 fps clip generated from `odyssey-frame-1.mp4` for embedding above. |
+| `assets/demo.gif` | 18 s, 240×430, ~12 fps clip generated from `assets/odyssey-frame-1.mp4` starting at t=3 s. Playback duration matches the source (no speed change). |
 
 Replace the MP4s with a legally obtained copy before running the converter.
-
-### Reference stills
 
 `assets/video-odyssey-trailer-1.jpeg`:
 
