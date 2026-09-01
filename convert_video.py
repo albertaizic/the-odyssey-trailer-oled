@@ -156,11 +156,10 @@ def write_output(
 constexpr uint16_t ODYSSEY_WIDTH = {OLED_WIDTH};
 constexpr uint16_t ODYSSEY_HEIGHT = {OLED_HEIGHT};
 constexpr uint16_t ODYSSEY_BYTES_PER_FRAME = {BYTES_PER_FRAME};
-constexpr uint8_t ODYSSEY_FPS = {fps}
-constexpr uint32_t ODYSSEY_FRAME_COUNT = {len(frames)}
+constexpr uint8_t ODYSSEY_FPS = {fps};
+constexpr uint32_t ODYSSEY_FRAME_COUNT = {len(frames)};
 
-extern const uint8_t
-ODYSSEY_FRAMES[ODYSSEY_FRAME_COUNT][ODYSSEY_BYTES_PER_FRAME]
+extern const uint8_t ODYSSEY_FRAMES[ODYSSEY_FRAME_COUNT][ODYSSEY_BYTES_PER_FRAME];
 """
 
     with header_path.open("w") as h:
